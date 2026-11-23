@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Design Daily — Curiosity for Makers</title>
+    <title>Design Daily — Daily Stories for Curious Minds</title>
     <style>
         * {
             margin: 0;
@@ -13,7 +13,7 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-            background: #f5f5f3;
+            background: linear-gradient(135deg, #f5f5f3 0%, #fafaf8 100%);
             color: #2b2b2b;
             line-height: 1.6;
             min-height: 100vh;
@@ -21,114 +21,119 @@
         }
 
         .wrapper {
-            max-width: 800px;
+            max-width: 700px;
             margin: 0 auto;
         }
 
-        /* Header & Navigation */
+        /* Header */
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 40px;
+            margin-bottom: 32px;
         }
 
         .logo {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 600;
             letter-spacing: -0.5px;
         }
 
-        .streak-badge {
+        .streak {
             display: flex;
             align-items: center;
-            gap: 8px;
-            padding: 8px 16px;
-            background: white;
-            border-radius: 2px;
-            border: 1px solid #e0e0dd;
+            gap: 6px;
             font-size: 14px;
             font-weight: 500;
         }
 
-        .streak-count {
-            font-size: 18px;
+        .streak-num {
+            font-size: 16px;
             font-weight: 700;
             color: #d97757;
         }
 
-        .tabs {
-            display: flex;
-            gap: 24px;
-            border-bottom: 1px solid #e0e0dd;
-            margin-bottom: 32px;
-        }
-
-        .tab {
-            padding: 12px 0;
-            border: none;
-            background: none;
-            cursor: pointer;
-            font-size: 15px;
-            color: #999;
-            border-bottom: 2px solid transparent;
-            transition: all 0.2s ease;
-        }
-
-        .tab.active {
-            color: #2b2b2b;
-            border-bottom-color: #2b2b2b;
-        }
-
-        /* Main Content Area */
-        .content {
-            display: none;
-        }
-
-        .content.active {
-            display: block;
-        }
-
-        /* Today's Question */
-        .today-section {
+        /* Daily Theme */
+        .theme-card {
             background: white;
-            padding: 48px 40px;
             border-radius: 2px;
+            padding: 32px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            margin-bottom: 28px;
+            border-left: 4px solid #d97757;
+        }
+
+        .theme-label {
+            font-size: 12px;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .theme-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #1a1a1a;
+        }
+
+        .theme-description {
+            font-size: 15px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Progress */
+        .progress-section {
             margin-bottom: 24px;
         }
 
-        .question-meta {
+        .progress-info {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            margin-bottom: 32px;
+            margin-bottom: 8px;
             font-size: 13px;
             color: #999;
         }
 
-        .category-label {
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            padding: 6px 12px;
-            background: #f0f0ed;
-            border-radius: 3px;
+        .progress-bar {
+            height: 3px;
+            background: #e8e8e6;
+            border-radius: 2px;
+            overflow: hidden;
         }
 
-        .format-badge {
-            background: #e8e8e6;
-            padding: 6px 12px;
-            border-radius: 3px;
+        .progress-fill {
+            height: 100%;
+            background: #d97757;
+            transition: width 0.6s ease;
+        }
+
+        /* Question Card */
+        .question-card {
+            background: white;
+            border-radius: 2px;
+            padding: 40px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            margin-bottom: 24px;
+        }
+
+        .question-number {
+            font-size: 12px;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 16px;
             font-weight: 500;
-            text-transform: capitalize;
         }
 
         .question-text {
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 600;
             line-height: 1.4;
-            margin-bottom: 32px;
+            margin-bottom: 24px;
             color: #1a1a1a;
         }
 
@@ -136,12 +141,32 @@
             font-weight: 700;
         }
 
-        /* Question Types */
+        .hint {
+            background: #f9f7f5;
+            border-left: 3px solid #d97757;
+            padding: 12px 16px;
+            border-radius: 2px;
+            margin-bottom: 24px;
+            font-size: 14px;
+            color: #777;
+            font-style: italic;
+        }
+
+        .hint-label {
+            font-size: 11px;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+            margin-bottom: 4px;
+            font-style: normal;
+        }
+
+        /* Options */
         .options {
             display: flex;
             flex-direction: column;
             gap: 12px;
-            margin-bottom: 24px;
         }
 
         .option {
@@ -153,11 +178,13 @@
             background: white;
             text-align: left;
             font-size: 15px;
+            position: relative;
         }
 
         .option:hover:not(.disabled) {
             border-color: #999;
             background: #fefdfb;
+            transform: translateX(4px);
         }
 
         .option.selected {
@@ -181,86 +208,34 @@
             cursor: default;
         }
 
-        .case-study {
-            background: #fefdfb;
-            border: 1px solid #e0e0dd;
-            padding: 24px;
-            border-radius: 2px;
-            margin-bottom: 24px;
-        }
-
-        .case-study-title {
-            font-size: 13px;
-            color: #999;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 12px;
-            font-weight: 500;
-        }
-
-        .case-study-content {
-            font-size: 15px;
-            line-height: 1.6;
-            color: #555;
-            margin-bottom: 16px;
-        }
-
-        .decision-options {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 12px;
-        }
-
-        .decision-option {
-            padding: 12px 16px;
-            border: 1px solid #ddd;
-            border-radius: 2px;
-            cursor: pointer;
-            text-align: center;
-            font-size: 14px;
-            transition: all 0.2s ease;
-        }
-
-        .decision-option:hover:not(.disabled) {
-            border-color: #2b2b2b;
-            background: #f5f5f3;
-        }
-
-        .decision-option.selected {
-            border-color: #2b2b2b;
-            background: #2b2b2b;
-            color: white;
-        }
-
-        .textarea-input {
-            width: 100%;
-            padding: 16px;
-            border: 1px solid #ddd;
-            border-radius: 2px;
-            font-family: inherit;
-            font-size: 15px;
-            resize: vertical;
-            min-height: 100px;
-            margin-bottom: 16px;
-        }
-
-        .textarea-input:focus {
-            outline: none;
-            border-color: #2b2b2b;
-            background: #fefdfb;
-        }
-
-        .feedback {
+        /* Feedback */
+        .feedback-container {
             margin-top: 24px;
-            padding: 20px;
-            border-radius: 2px;
-            font-size: 14px;
-            line-height: 1.6;
             display: none;
         }
 
-        .feedback.show {
+        .feedback-container.show {
             display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-8px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .feedback {
+            padding: 16px;
+            border-radius: 2px;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 16px;
         }
 
         .feedback.correct {
@@ -281,150 +256,55 @@
             margin-bottom: 8px;
         }
 
-        /* Community Responses */
-        .community-section {
+        .feedback-insight {
             background: white;
-            padding: 32px 40px;
+            border: 1px solid #e0e0dd;
+            padding: 16px;
             border-radius: 2px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-            margin-top: 24px;
+            margin-top: 16px;
+            font-size: 14px;
+            color: #555;
         }
 
-        .section-title {
-            font-size: 14px;
+        .insight-label {
+            font-size: 12px;
             color: #999;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            margin-bottom: 24px;
+            margin-bottom: 8px;
             font-weight: 500;
         }
 
-        .response-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 20px;
-            margin-bottom: 32px;
-            padding-bottom: 32px;
-            border-bottom: 1px solid #e0e0dd;
+        .insight-text {
+            font-style: italic;
+            color: #666;
         }
 
-        .stat-item {
+        .community-stat {
+            background: #fafaf8;
+            padding: 12px 16px;
+            border-radius: 2px;
+            font-size: 14px;
             text-align: center;
+            color: #777;
+            margin-top: 16px;
         }
 
-        .stat-percentage {
-            font-size: 28px;
+        .stat-value {
             font-weight: 700;
             color: #2b2b2b;
             display: block;
+            font-size: 18px;
         }
 
-        .stat-label {
-            font-size: 13px;
-            color: #999;
-            margin-top: 8px;
-        }
-
-        .community-voices {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .voice-card {
-            padding: 16px;
-            background: #fafaf8;
-            border-left: 3px solid #d97757;
-            border-radius: 2px;
-        }
-
-        .voice-choice {
-            font-size: 13px;
-            color: #999;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 6px;
-            font-weight: 500;
-        }
-
-        .voice-comment {
-            font-size: 14px;
-            line-height: 1.6;
-            color: #555;
-            font-style: italic;
-        }
-
-        /* Discussion Prompt */
-        .discussion-section {
-            background: white;
-            padding: 32px 40px;
-            border-radius: 2px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-            margin-top: 24px;
-        }
-
-        .prompt-text {
-            font-size: 15px;
-            line-height: 1.6;
-            color: #555;
-            margin-bottom: 16px;
-        }
-
-        /* Archive */
-        .archive-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 16px;
-        }
-
-        .archive-card {
-            background: white;
-            padding: 20px;
-            border-radius: 2px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .archive-card:hover {
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-        }
-
-        .archive-date {
-            font-size: 12px;
-            color: #999;
-            margin-bottom: 8px;
-        }
-
-        .archive-category {
-            display: inline-block;
-            font-size: 11px;
-            color: #d97757;
-            text-transform: uppercase;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-
-        .archive-question {
-            font-size: 15px;
-            font-weight: 500;
-            line-height: 1.4;
-            color: #2b2b2b;
-            margin-bottom: 12px;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-        /* Buttons */
-        .button-group {
+        /* Navigation */
+        .nav-buttons {
             display: flex;
             gap: 12px;
-            margin-top: 24px;
+            margin-top: 32px;
         }
 
-        button {
+        .btn {
             flex: 1;
             padding: 14px 24px;
             border: 1px solid #ddd;
@@ -437,51 +317,87 @@
             transition: all 0.2s ease;
         }
 
-        button:hover {
+        .btn:hover {
             border-color: #2b2b2b;
             background: #f5f5f3;
         }
 
-        button.primary {
+        .btn.primary {
             background: #2b2b2b;
             color: white;
             border-color: #2b2b2b;
-            flex: 1;
         }
 
-        button.primary:hover {
+        .btn.primary:hover {
             background: #1a1a1a;
         }
 
-        button:disabled {
+        .btn:disabled {
             opacity: 0.5;
             cursor: not-allowed;
         }
 
+        /* Completion */
+        .completion-card {
+            background: white;
+            border-radius: 2px;
+            padding: 48px 40px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            text-align: center;
+        }
+
+        .completion-emoji {
+            font-size: 56px;
+            margin-bottom: 16px;
+        }
+
+        .completion-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .completion-text {
+            color: #666;
+            margin-bottom: 32px;
+            font-size: 15px;
+        }
+
+        .completion-stat {
+            background: #f5f5f3;
+            padding: 20px;
+            border-radius: 2px;
+            margin-bottom: 32px;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #999;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .stat-display {
+            font-size: 32px;
+            font-weight: 700;
+            color: #d97757;
+        }
+
         @media (max-width: 600px) {
-            .today-section {
-                padding: 32px 24px;
+            .question-card {
+                padding: 28px 20px;
             }
 
             .question-text {
-                font-size: 20px;
+                font-size: 18px;
             }
 
-            .header {
+            .theme-title {
+                font-size: 22px;
+            }
+
+            .nav-buttons {
                 flex-direction: column;
-                gap: 16px;
-            }
-
-            .tabs {
-                gap: 16px;
-            }
-
-            .response-stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .archive-grid {
-                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -491,324 +407,241 @@
         <!-- Header -->
         <div class="header">
             <div class="logo">Design Daily</div>
-            <div class="streak-badge">
-                🔥 <span class="streak-count" id="streakCount">0</span> days
+            <div class="streak">
+                🔥 <span class="streak-num" id="streakNum">0</span>
             </div>
         </div>
 
-        <!-- Navigation Tabs -->
-        <div class="tabs">
-            <button class="tab active" onclick="switchTab('today')">Today's Question</button>
-            <button class="tab" onclick="switchTab('archive')">Your Archive</button>
-        </div>
-
-        <!-- Today's Question Tab -->
-        <div id="today" class="content active">
-            <div class="today-section" id="questionContainer"></div>
-            <div class="community-section" id="communityContainer" style="display:none;"></div>
-            <div class="discussion-section" id="discussionContainer" style="display:none;"></div>
-        </div>
-
-        <!-- Archive Tab -->
-        <div id="archive" class="content">
-            <div id="archiveContainer"></div>
-        </div>
+        <!-- Daily Story Container -->
+        <div id="storyContainer"></div>
     </div>
 
     <script>
-        // Interdisciplinary question database
-        const questions = [
+        // Daily stories with related questions building a narrative
+        const stories = [
             {
                 id: 0,
-                category: "Biology",
-                format: "multiple-choice",
-                question: "How do <strong>murmuration</strong> patterns in starling flocks form without a leader directing them?",
-                options: [
-                    { text: "One alpha bird leads the entire flock", correct: false },
-                    { text: "Each bird follows simple local rules based on neighbors", correct: true },
-                    { text: "Birds communicate through ultrasonic calls", correct: false },
-                    { text: "The pattern is random and accidental", correct: false }
-                ],
-                feedback: "Correct. Murmurations are emergent behavior—each bird follows 3 simple rules (separation, alignment, cohesion) relative to its neighbors. No top-down control, yet patterns emerge. This teaches us about systems thinking and emergence.",
-                discussionPrompt: "Where have you seen complex order emerge from simple local rules?"
+                day: "How Nature Solves Problems",
+                description: "Exploring emergent behavior, efficiency, and adaptation across different scales.",
+                questions: [
+                    {
+                        number: 1,
+                        text: "How do <strong>murmuration patterns</strong> in starling flocks form without a leader directing them?",
+                        hint: "Each bird follows simple rules about its immediate neighbors.",
+                        options: [
+                            { text: "One alpha bird leads the entire flock", correct: false },
+                            { text: "Each bird follows simple local rules based on neighbors", correct: true },
+                            { text: "Birds communicate through ultrasonic calls", correct: false },
+                            { text: "The pattern is random and accidental", correct: false }
+                        ],
+                        feedback: "Murmurations emerge from local behavior, not top-down control. Each bird adjusts position relative to its neighbors—no headquarters needed.",
+                        insight: "This principle applies everywhere: markets, immune systems, ant colonies. Complex order without central planning."
+                    },
+                    {
+                        number: 2,
+                        text: "Why does <strong>mud crack</strong> in regular hexagonal patterns, not random shapes?",
+                        hint: "Hexagons minimize the perimeter needed to divide an area.",
+                        options: [
+                            { text: "Hexagons are the strongest shape in nature", correct: false },
+                            { text: "Water evaporates uniformly in six directions", correct: false },
+                            { text: "The pattern minimizes stress and energy efficiently", correct: true },
+                            { text: "Mud naturally prefers hexagonal shapes", correct: false }
+                        ],
+                        feedback: "Geometry solves the problem. Hexagons distribute stress while using minimal material—nature's answer to 'do more with less.'",
+                        insight: "Honeycomb, basalt columns, dragonfly eyes: nature keeps arriving at hexagons. A design principle older than design itself."
+                    },
+                    {
+                        number: 3,
+                        text: "<strong>Mycelium networks</strong> underground can span miles and connect trees, allowing them to share nutrients and information.",
+                        hint: "The forest functions as a single interconnected system.",
+                        options: [
+                            { text: "True", correct: true },
+                            { text: "False", correct: false }
+                        ],
+                        feedback: "True. The 'wood wide web' shows forests aren't collections of individual trees—they're a connected system where the whole is stronger.",
+                        insight: "A felled tree can still nourish neighbors through the network. This challenges our notion of individual success."
+                    },
+                    {
+                        number: 4,
+                        text: "Which natural system demonstrates <strong>both emergence and efficiency</strong>?",
+                        hint: "Think about all three examples we've explored.",
+                        options: [
+                            { text: "Only murmurations", correct: false },
+                            { text: "Only hexagonal patterns", correct: false },
+                            { text: "Only mycelium networks", correct: false },
+                            { text: "All three—they share the same principle", correct: true }
+                        ],
+                        feedback: "All three systems show: simple local rules → complex global behavior. And all solve the problem of maximum efficiency.",
+                        insight: "The principle: Constraint breeds elegance. Local optimization creates global solutions."
+                    },
+                    {
+                        number: 5,
+                        text: "As a designer, which insight resonates most with your work?",
+                        hint: "Think about how you approach problems.",
+                        options: [
+                            { text: "Emergent systems (let order emerge from rules)", correct: false },
+                            { text: "Geometric efficiency (do more with less)", correct: false },
+                            { text: "Interconnection (everything is connected)", correct: false },
+                            { text: "All three inform how I design", correct: true }
+                        ],
+                        feedback: "The most powerful designers think in systems: simple rules, geometric restraint, and understanding how pieces connect.",
+                        insight: "Nature has been solving design problems for 4 billion years. We're just learning the alphabet."
+                    }
+                ]
             },
             {
                 id: 1,
-                category: "Psychology",
-                format: "case-study",
-                question: "A hospital redesigned their hallways to paint more natural light on walls in areas with low windows. Patient stress markers improved significantly.",
-                caseStudyContext: "No actual light was added. Only the visual perception of light was changed through paint color and reflection strategies.",
-                options: [
-                    { text: "This is placebo, not meaningful", responseCount: 20, percentage: 20 },
-                    { text: "This proves perception affects well-being", responseCount: 55, percentage: 55 },
-                    { text: "Interesting but needs more research", responseCount: 25, percentage: 25 }
-                ],
-                feedback: "Perception shapes experience. This isn't a placebo—if humans experience less stress from the visual impression of light, that's a real, measurable outcome. The brain doesn't distinguish between 'real' and 'perceived.'",
-                discussionPrompt: "How does understanding perception change how you think about creating spaces or interfaces?"
-            },
-            {
-                id: 2,
-                category: "Systems",
-                format: "true-false",
-                question: "In nature, <strong>predator-prey cycles</strong> show that populations increase together in a pattern called the Lotka-Volterra model.",
-                options: [
-                    { text: "True", correct: true },
-                    { text: "False", correct: false }
-                ],
-                feedback: "True. More prey → more predators → fewer prey → fewer predators → cycle repeats. This isn't chaos—it's elegant feedback loops. Understanding this teaches you how systems self-regulate.",
-                discussionPrompt: "What are the feedback loops in your daily work? Where do problems cascade unexpectedly?"
-            },
-            {
-                id: 3,
-                category: "Economics",
-                format: "multiple-choice",
-                question: "What is <strong>Goodhart's Law</strong>?",
-                options: [
-                    { text: "When a measure becomes a target, it ceases to be a good measure", correct: true },
-                    { text: "Good design is invisible", correct: false },
-                    { text: "Markets always reach equilibrium", correct: false },
-                    { text: "People are rational economic actors", correct: false }
-                ],
-                feedback: "Correct. Once you optimize for a metric (test scores, engagement, clicks), it distorts behavior. Teams game the system. This is crucial: what you measure changes what people do.",
-                discussionPrompt: "What metrics are you optimizing for? Are they measuring what actually matters?"
-            },
-            {
-                id: 4,
-                category: "History",
-                format: "true-false",
-                question: "The printing press was the <strong>first</strong> technology to cause mass anxiety about information overload.",
-                options: [
-                    { text: "True", correct: true },
-                    { text: "False", correct: false }
-                ],
-                feedback: "True. When the printing press arrived, scholars panicked: 'Too many books! We can't read them all!' Same anxiety we feel about the internet. History teaches us that disruption feels chaotic but creates new order.",
-                discussionPrompt: "What feels overwhelming about current technology? What feels normal now that once felt overwhelming?"
-            },
-            {
-                id: 5,
-                category: "Physics",
-                format: "multiple-choice",
-                question: "Why does <strong>mud</strong> dry and crack in regular hexagonal patterns, not random shapes?",
-                options: [
-                    { text: "Hexagons are the strongest shape in nature", correct: false },
-                    { text: "Water evaporates uniformly in six directions", correct: false },
-                    { text: "The pattern minimizes stress and energy efficiently", correct: true },
-                    { text: "Mud naturally prefers hexagonal shapes", correct: false }
-                ],
-                feedback: "Correct. Hexagons minimize the perimeter needed to divide an area. Nature repeatedly finds this solution (honeycombs, dragonfly eyes, basalt columns). Efficiency through geometry.",
-                discussionPrompt: "Where do you see nature solving design problems more elegantly than humans?"
-            },
-            {
-                id: 6,
-                category: "Psychology",
-                format: "multiple-choice",
-                question: "The <strong>Dunning-Kruger effect</strong> describes what phenomenon?",
-                options: [
-                    { text: "Highly competent people underestimate their abilities", correct: false },
-                    { text: "Incompetent people overestimate their knowledge", correct: true },
-                    { text: "Everyone is equally overconfident", correct: false },
-                    { text: "Competence and confidence are perfectly correlated", correct: false }
-                ],
-                feedback: "Correct. Those who lack expertise often can't recognize the gaps in their knowledge. As you learn more, confidence actually drops (you see how much you don't know). This teaches humility and the importance of feedback.",
-                discussionPrompt: "When have you been most confident about something you later realized you misunderstood?"
-            },
-            {
-                id: 7,
-                category: "Nature",
-                format: "true-false",
-                question: "<strong>Mycelium networks</strong> (fungal threads) underground can span miles and connect trees, allowing them to share nutrients and information.",
-                options: [
-                    { text: "True", correct: true },
-                    { text: "False", correct: false }
-                ],
-                feedback: "True. The 'wood wide web' shows that forests are interconnected systems, not collections of isolated trees. A felled tree can still nourish neighbors through the network. This challenges our notion of individual success.",
-                discussionPrompt: "How does thinking in networks vs. individuals change how you design systems?"
-            },
-            {
-                id: 8,
-                category: "Philosophy",
-                format: "multiple-choice",
-                question: "What does <strong>Occam's Razor</strong> suggest?",
-                options: [
-                    { text: "Simpler explanations are more likely to be correct", correct: true },
-                    { text: "Simple is always better than complex", correct: false },
-                    { text: "Complex problems require complex solutions", correct: false },
-                    { text: "The most detailed explanation wins", correct: false }
-                ],
-                feedback: "Correct. When two explanations fit the evidence equally well, choose the simpler one. This doesn't mean 'simple is better'—it means don't add complexity unless it explains more.",
-                discussionPrompt: "Where have you added complexity that wasn't needed? Where were you too aggressive with simplification?"
-            },
-            {
-                id: 9,
-                category: "Behavior",
-                format: "case-study",
-                question: "A company removed all office clocks and structured breaks. Employees worked longer hours but reported higher satisfaction and took fewer sick days.",
-                caseStudyContext: "Without visible time, workers stopped watching the clock. They worked to completion of tasks rather than time passage.",
-                options: [
-                    { text: "Employees are being exploited more", responseCount: 15, percentage: 15 },
-                    { text: "This reveals how environmental design shapes behavior", responseCount: 70, percentage: 70 },
-                    { text: "The effect won't last long-term", responseCount: 15, percentage: 15 }
-                ],
-                feedback: "The environment shapes behavior profoundly. Removing clocks changed how workers perceive time. This isn't manipulation—it's recognition that context affects psychology.",
-                discussionPrompt: "What environmental cues are shaping behavior in spaces you design?"
+                day: "Feedback Loops That Build",
+                description: "How systems amplify, how metrics shape behavior, how small changes create big effects.",
+                questions: [
+                    {
+                        number: 1,
+                        text: "In nature, <strong>predator-prey cycles</strong> show that populations increase together in a pattern called the Lotka-Volterra model.",
+                        hint: "More food → more predators → less food → pattern repeats.",
+                        options: [
+                            { text: "True", correct: true },
+                            { text: "False", correct: false }
+                        ],
+                        feedback: "True. This elegant feedback loop generates oscillation—a dance between two populations. Neither controls the other; the pattern emerges.",
+                        insight: "Feedback loops aren't chaos—they're self-correcting systems. The economy, climate, even your body uses them."
+                    },
+                    {
+                        number: 2,
+                        text: "What is <strong>Goodhart's Law</strong>?",
+                        hint: "It's about what happens when you optimize for a metric.",
+                        options: [
+                            { text: "When a measure becomes a target, it ceases to be a good measure", correct: true },
+                            { text: "Good design is invisible", correct: false },
+                            { text: "Markets always reach equilibrium", correct: false },
+                            { text: "People are rational economic actors", correct: false }
+                        ],
+                        feedback: "Once you optimize for a metric, people game it. Test scores rise but learning drops. Engagement metrics climb but loyalty falls.",
+                        insight: "What you measure shapes what people do. Choose your metrics carefully—they become your culture."
+                    },
+                    {
+                        number: 3,
+                        text: "A company removed all office clocks and structured breaks. Employees worked longer but reported higher satisfaction.",
+                        hint: "Perception shapes behavior as much as reality.",
+                        options: [
+                            { text: "Employees are being exploited more", correct: false },
+                            { text: "This reveals how environmental design shapes behavior", correct: true },
+                            { text: "The effect won't last long-term", correct: false }
+                        ],
+                        feedback: "Without time cues, people stopped watching the clock. They worked to task completion instead of time passage. The environment changed behavior.",
+                        insight: "Environment is design's most powerful lever. Remove the constraint, change the outcome."
+                    },
+                    {
+                        number: 4,
+                        text: "Which best describes a <strong>virtuous cycle</strong>?",
+                        hint: "One where each step reinforces the next, building momentum.",
+                        options: [
+                            { text: "Success → more confidence → more risk-taking → more success", correct: true },
+                            { text: "Failure → fear → avoidance → stagnation", correct: false },
+                            { text: "Stability → no change → no growth", correct: false },
+                            { text: "All feedback loops are virtuous", correct: false }
+                        ],
+                        feedback: "Virtuous cycles accelerate. Each win builds momentum. The opposite—vicious cycles—spiral downward. Design systems, not individual actions.",
+                        insight: "Small interventions in the right place cascade. This is leverage. This is where design thinking wins."
+                    },
+                    {
+                        number: 5,
+                        text: "What feedback loops are you creating in your designs?",
+                        hint: "Consider both intentional and unintended consequences.",
+                        options: [
+                            { text: "I focus on single interactions, not systems", correct: false },
+                            { text: "I map how each action creates reactions", correct: true },
+                            { text: "Feedback loops are too complex to predict", correct: false },
+                            { text: "That's for product managers, not designers", correct: false }
+                        ],
+                        feedback: "Great designers think in feedback loops. They ask: What happens when people use this? What cascades from that?",
+                        insight: "The best design decisions multiply. You're not just designing interfaces—you're designing incentive systems."
+                    }
+                ]
             }
         ];
 
-        // Sample community responses
-        const sampleCommunityResponses = [
-            {
-                choice: "This reveals how environmental design shapes behavior",
-                comment: "I never thought about how removing friction changes motivation entirely."
-            },
-            {
-                choice: "Interesting but needs more research",
-                comment: "The honeycomb pattern is everywhere—from bees to basalt columns. Nature keeps arriving at the same answer."
-            },
-            {
-                choice: "Proves perception affects well-being",
-                comment: "This means our job as makers is more about shaping perception than shaping physical reality."
-            }
-        ];
+        let currentStoryId = 0;
+        let currentQuestionIndex = 0;
+        let answeredQuestions = [];
 
-        // Get today's question
-        function getTodaysQuestion() {
+        function getTodaysStory() {
             const today = new Date();
             const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
-            return questions[dayOfYear % questions.length];
+            return stories[dayOfYear % stories.length];
         }
 
-        function formatDate(date) {
-            const options = { weekday: 'long', month: 'short', day: 'numeric' };
-            return date.toLocaleDateString('en-US', options);
-        }
+        function renderStory() {
+            const story = getTodaysStory();
+            currentStoryId = story.id;
+            currentQuestionIndex = 0;
+            answeredQuestions = [];
 
-        function switchTab(tab) {
-            document.querySelectorAll('.content').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
-            document.getElementById(tab).classList.add('active');
-            event.target.classList.add('active');
-        }
-
-        function renderQuestion() {
-            const question = getTodaysQuestion();
-            const container = document.getElementById('questionContainer');
-            const today = formatDate(new Date());
-            
-            let html = `
-                <div class="question-meta">
-                    <span>${today}</span>
-                    <div style="display: flex; gap: 12px;">
-                        <span class="category-label">${question.category}</span>
-                        <span class="format-badge">${question.format.replace('-', ' ')}</span>
-                    </div>
+            const html = `
+                <div class="theme-card">
+                    <div class="theme-label">Today's Story</div>
+                    <div class="theme-title">${story.day}</div>
+                    <div class="theme-description">${story.description}</div>
                 </div>
-                <div class="question-text">${question.question}</div>
+                <div id="questionContainer"></div>
             `;
 
-            if (question.format === 'multiple-choice' || question.format === 'true-false') {
-                html += `<div class="options">`;
-                question.options.forEach((option, index) => {
-                    html += `
-                        <div class="option" onclick="selectOption(${index}, ${option.correct})">
-                            ${option.text}
-                        </div>
-                    `;
-                });
-                html += `</div>`;
-            } else if (question.format === 'case-study') {
-                html += `
-                    <div class="case-study">
-                        <div class="case-study-title">The Context</div>
-                        <div class="case-study-content">${question.caseStudyContext}</div>
-                    </div>
-                    <div class="decision-options">
-                `;
-                question.options.forEach((option, index) => {
-                    html += `<div class="decision-option" onclick="selectDecision(${index})">${option.text}</div>`;
-                });
-                html += `</div>`;
-            }
+            document.getElementById('storyContainer').innerHTML = html;
+            renderQuestion(story);
+        }
 
-            html += `<div class="feedback" id="feedback"></div>`;
+        function renderQuestion(story) {
+            const question = story.questions[currentQuestionIndex];
+            const container = document.getElementById('questionContainer');
+
+            const progressPercentage = ((currentQuestionIndex + 1) / story.questions.length) * 100;
+
+            let html = `
+                <div class="progress-section">
+                    <div class="progress-info">
+                        <span>Question ${currentQuestionIndex + 1} of ${story.questions.length}</span>
+                        <span id="completionPercent">${Math.round(progressPercentage)}%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: ${progressPercentage}%;"></div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-number">Question ${question.number}</div>
+                    <div class="question-text">${question.text}</div>
+                    <div class="hint">
+                        <div class="hint-label">Hint</div>
+                        ${question.hint}
+                    </div>
+                    <div class="options" id="optionsContainer">
+            `;
+
+            question.options.forEach((option, index) => {
+                html += `
+                    <div class="option" onclick="selectAnswer(${currentQuestionIndex}, ${index}, ${option.correct})">
+                        ${option.text}
+                    </div>
+                `;
+            });
+
+            html += `
+                    </div>
+                    <div class="feedback-container" id="feedbackContainer"></div>
+                </div>
+            `;
+
             container.innerHTML = html;
         }
 
-        function renderCommunity() {
-            const question = getTodaysQuestion();
-            if (question.format !== 'case-study') {
-                document.getElementById('communityContainer').style.display = 'none';
-                return;
-            }
-
-            let html = `<div class="section-title">How Others Answered</div>`;
-            html += `<div class="response-stats">`;
-            
-            question.options.forEach(opt => {
-                html += `
-                    <div class="stat-item">
-                        <span class="stat-percentage">${opt.percentage}%</span>
-                        <span class="stat-label">${opt.text}</span>
-                    </div>
-                `;
-            });
-            
-            html += `</div><div class="community-voices">`;
-            sampleCommunityResponses.forEach(response => {
-                html += `
-                    <div class="voice-card">
-                        <div class="voice-choice">${response.choice}</div>
-                        <div class="voice-comment">"${response.comment}"</div>
-                    </div>
-                `;
-            });
-            
-            html += `</div>`;
-            document.getElementById('communityContainer').innerHTML = html;
-            document.getElementById('communityContainer').style.display = 'block';
-        }
-
-        function renderDiscussion() {
-            const question = getTodaysQuestion();
-            let html = `
-                <div class="section-title">Reflect</div>
-                <div class="prompt-text"><strong>Consider:</strong> ${question.discussionPrompt}</div>
-                <textarea class="textarea-input" placeholder="Your thoughts..."></textarea>
-                <button class="primary" onclick="saveReflection()">Save Reflection</button>
-            `;
-            document.getElementById('discussionContainer').innerHTML = html;
-            document.getElementById('discussionContainer').style.display = 'block';
-        }
-
-        function renderArchive() {
-            // Sample archive data with mixed categories
-            const archiveData = [
-                { date: 'Oct 12', category: 'Systems', question: 'How do feedback loops create emergent behavior?', response: 'I realized our product uses the same principle—each action triggers the next.' },
-                { date: 'Oct 11', category: 'Psychology', question: 'How does perception shape experience?', response: 'It made me reconsider what "real" means in design.' },
-                { date: 'Oct 10', category: 'Biology', question: 'How does nature solve complex problems?', response: 'Efficiency through constraints—constraints breed creativity.' }
-            ];
-
-            let html = `<div class="archive-grid">`;
-            archiveData.forEach(item => {
-                html += `
-                    <div class="archive-card">
-                        <div class="archive-date">${item.date}</div>
-                        <div class="archive-category">${item.category}</div>
-                        <div class="archive-question">${item.question}</div>
-                        <div style="font-size: 13px; color: #777; padding-top: 12px; border-top: 1px solid #e0e0dd; margin-top: 12px;">${item.response}</div>
-                    </div>
-                `;
-            });
-            html += `</div>`;
-            document.getElementById('archiveContainer').innerHTML = html;
-        }
-
-        function selectOption(index, isCorrect) {
+        function selectAnswer(questionIdx, optionIdx, isCorrect) {
+            const story = getTodaysStory();
+            const question = story.questions[questionIdx];
             const options = document.querySelectorAll('.option');
-            const question = getTodaysQuestion();
-            
+
+            // Mark answer
             options.forEach((opt, i) => {
                 opt.classList.add('disabled');
-                if (i === index) {
+                if (i === optionIdx) {
                     opt.classList.add('selected');
                     if (isCorrect) {
                         opt.classList.add('correct');
@@ -820,47 +653,92 @@
                 }
             });
 
-            const feedback = document.getElementById('feedback');
-            feedback.className = `feedback show ${isCorrect ? 'correct' : 'incorrect'}`;
-            feedback.innerHTML = `<strong>${isCorrect ? '✓ Correct' : '✗ Consider this'}</strong>${question.feedback}`;
-            
-            renderCommunity();
-            setTimeout(() => renderDiscussion(), 500);
+            // Show feedback
+            const feedbackContainer = document.getElementById('feedbackContainer');
+            feedbackContainer.classList.add('show');
+
+            const feedbackHtml = `
+                <div class="feedback ${isCorrect ? 'correct' : 'incorrect'}">
+                    <strong>${isCorrect ? '✓ Correct' : '✗ Consider this'}</strong>
+                    ${question.feedback}
+                </div>
+                <div class="feedback-insight">
+                    <div class="insight-label">Insight</div>
+                    <div class="insight-text">${question.insight}</div>
+                </div>
+                <div class="community-stat">
+                    <div class="stat-value">${Math.floor(Math.random() * 40) + 60}%</div>
+                    of designers answered like you
+                </div>
+            `;
+
+            feedbackContainer.innerHTML = feedbackHtml;
+
+            // Record answer
+            answeredQuestions.push({ question: questionIdx, answer: optionIdx, correct: isCorrect });
+
+            // Show next button or completion
+            setTimeout(() => {
+                if (currentQuestionIndex < story.questions.length - 1) {
+                    feedbackContainer.innerHTML += `
+                        <div class="nav-buttons">
+                            <button class="btn primary" onclick="nextQuestion()">Next Question →</button>
+                        </div>
+                    `;
+                } else {
+                    feedbackContainer.innerHTML += `
+                        <div class="nav-buttons">
+                            <button class="btn primary" onclick="showCompletion()">See Your Story</button>
+                        </div>
+                    `;
+                }
+            }, 100);
+
             updateStreak();
         }
 
-        function selectDecision(index) {
-            const options = document.querySelectorAll('.decision-option');
-            options[index].classList.add('selected');
-            
-            const feedback = document.getElementById('feedback');
-            const question = getTodaysQuestion();
-            feedback.className = 'feedback show correct';
-            feedback.innerHTML = `<strong>✓ Interesting perspective</strong><br>${question.feedback}`;
-            
-            renderCommunity();
-            setTimeout(() => renderDiscussion(), 500);
-            updateStreak();
+        function nextQuestion() {
+            currentQuestionIndex++;
+            const story = getTodaysStory();
+            renderQuestion(story);
         }
 
-        function saveReflection() {
-            alert('Reflection saved. Come back tomorrow for the next question.');
-            updateStreak();
+        function showCompletion() {
+            const story = getTodaysStory();
+            const correctCount = answeredQuestions.filter(a => a.correct).length;
+            const percentage = Math.round((correctCount / answeredQuestions.length) * 100);
+
+            const html = `
+                <div class="completion-card">
+                    <div class="completion-emoji">✨</div>
+                    <div class="completion-title">You've completed today's story</div>
+                    <div class="completion-text">"${story.day}"</div>
+                    <div class="completion-stat">
+                        <div class="stat-label">Your Understanding</div>
+                        <div class="stat-display">${percentage}%</div>
+                    </div>
+                    <div style="color: #666; font-size: 14px; margin-bottom: 32px;">
+                        <p style="margin-bottom: 8px;">You answered ${correctCount} of ${answeredQuestions.length} questions correctly.</p>
+                        <p style="margin-bottom: 8px;">Come back tomorrow for a new story.</p>
+                    </div>
+                    <button class="btn primary" onclick="location.reload()">Done</button>
+                </div>
+            `;
+
+            document.getElementById('storyContainer').innerHTML = html;
         }
 
         function updateStreak() {
             const streak = parseInt(localStorage.getItem('streak') || '0') + 1;
             localStorage.setItem('streak', streak);
-            document.getElementById('streakCount').textContent = streak;
+            document.getElementById('streakNum').textContent = streak;
         }
 
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
-            renderQuestion();
-            renderArchive();
-            
+            renderStory();
             const streak = localStorage.getItem('streak') || '0';
-            document.getElementById('streakCount').textContent = streak;
+            document.getElementById('streakNum').textContent = streak;
         });
     </script>
 </body>
